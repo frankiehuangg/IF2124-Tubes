@@ -1,0 +1,101 @@
+/***** Operator *****/
+ARITHMETIC -> + | - | * | ** | / | %
+INCDEC -> ++ | --
+
+ASSIGNMENT -> = | + = | - = | * = | / = | % = | * * = | < < = | > > = | > > > = | & = | ^ = | | = | & & = | | | = | ? ? =
+
+COMPARISON -> = = | = = = | ! = | ! = = | > | < | > = | < =
+
+LOGICAL -> && | ||
+
+BITWISE -> & | | | ^ | << | >> | >>>
+
+
+
+/***** Primitive Data Types *****/
+INTEGER -> number | number . number
+
+TEXT -> TEXT TEXT | string
+STRING -> " TEXT " | ' TEXT ' | STRING + STRING | STRING + NUMBER | NUMBER + STRING
+
+BOOLEAN -> ( BOOLEAN ) | BOOLEAN LOGICAL BOOLEAN | ! BOOLEAN | VALUE COMPARISON VALUE | true | false
+
+VALUE -> ( VALUE ) | INTEGER | STRING | BOOLEAN | null | VALUE COMPARISON VALUE | VALUE ARITHMETIC VALUE | VALUE INCDEC | VALUE BITWISE VALUE | ~ VALUE | null | undefined
+
+
+
+/***** Statements *****/
+LET -> let TEXT ASSIGNMENT VALUE | var TEXT ASSIGNMENT VALUE
+CONST -> const TEXT ASSIGNMENT VALUE
+
+
+
+/***** Comments *****/
+COMMENT -> / / VALUE | / * VALUE * /
+
+
+
+/***** Object *****/
+OBJECT_PROP -> OBJECT_PROP , OBJECT_PROP | TEXT : VALUE | TEXT : FUNCTION | TEXT
+OBJECT -> const TEXT = { OBJECT_PROP } 
+OBJECT_EXP -> OBJECT_EXP endline OBJECT_EXP | delete TEXT . TEXT endline
+
+
+
+/***** Array *****/
+ARRAY_PROP -> ARRAY_PROP , ARRAY_PROP | VALUE
+ARRAY -> const TEXT = [ ARRAY_PROP ]
+
+
+
+/***** Conditional *****/
+IF -> if ( BOOLEAN ) { S } | if ( BOOLEAN ) LINE endline
+ELIF -> ELIF ELIF | else if ( BOOLEAN ) { S } | else if ( BOOLEAN ) LINE endline
+ELSE -> else { S } | else LINE endline
+
+CONDITIONAL -> IF ELIF ELSE | IF ELSE | IF 
+
+
+
+/***** Switch *****/
+BREAK -> break endline
+CASE -> CASE CASE | case TEXT : S BREAK | case TEXT : S
+DEFAULT -> default : S BREAK | default : S
+SWITCH -> switch ( TEXT ) { CASE DEFAULT } | switch ( TEXT ) { CASE } 
+
+
+
+/***** Loops *****/
+LOOP_PROP -> LOOP_PROP LOOP_PROP | S | break endline | continue endline
+
+EXP_ONE -> EXP_ONE , EXP_ONE | LET
+EXP_THR -> EXP_THR , EXP_THR | TEXT INCDEC
+EXPRESSION -> EXP_ONE ; BOOLEAN ; EXP_THR | ; BOOLEAN ; EXP_THR | EXP_ONE ; ; EXP_THR | EXP_ONE ; BOOLEAN ; | ; ; EXP_THR | ; BOOLEAN ; | EXP_ONE ; ; | ; ; ;
+
+FOR -> for ( EXPRESSION ) { LOOP_PROP }  | for ( let TEXT in TEXT ) { LOOP_PROP } | for ( let TEXT of TEXT ) { LOOP_PROP }
+
+
+WHILE -> while ( BOOLEAN ) { LOOP_PROP }
+DOWHILE -> do { LOOP_PROP } while ( BOOLEAN ) endline
+
+
+/***** Functions *****/
+PARAMETER -> PARAMETER | PARAMETER , PARAMETER | TEXT
+FUNC_PROP -> FUNC_PROP FUNC_PROP | S | return VALUE
+
+FUNCTION -> function TEXT ( PARAMETER ) { FUNC_PROP } | const TEXT = function ( PARAMETER ) { FUNC_PROP } | ( PARAMETER ) => { FUNC_PROP }
+
+
+
+/***** Try Catch Finally *****/
+CATCH_PROP -> CATCH_PROP CATCH_PROP | S | throw STRING endline
+TRY -> try { CATCH_PROP }
+CATCH -> catch ( TEXT ) { CATCH_PROP }
+FINALLY -> finally { CATCH_PROP }
+
+CATCHBLOCK -> TRY CATCH FINALLY | TRY CATCH | TRY FINALLY
+
+
+/***** Line *****/
+S -> LINE LINE endline | LINE endline
+LINE -> LET | CONST | VALUE | OBJECT | ARRAY | OBJECT | ARRAY | CONDITIONAL | SWITCH | FOR | WHILE | DOWHILE | FUNCTION | CATCHBLOCK
