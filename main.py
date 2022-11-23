@@ -1,6 +1,6 @@
 import sys
 from src.Lexer import tokenize
-
+from src.CYK import parse
 
 if __name__ == '__main__':
 
@@ -15,5 +15,7 @@ if __name__ == '__main__':
         token = tokenize(text)
 
         print('\nTokens: ', token)
+        
+        parse(token)
     else:
         print("\nArgumen kurang dari 2!\n")
