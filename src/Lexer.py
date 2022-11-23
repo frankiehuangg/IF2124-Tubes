@@ -3,59 +3,91 @@ import re
 
 def tokenize(code):
     rules = [
-        ('BREAK', r'break'),            # break
-        ('ASSIGN_CONST', r'const'),     # const
-        ('SWITCH_CASE', r'case'),       # case
-        ('CATCH_CATCH', r'catch'),      # catch
-        ('CONTINUE', r'continue'),      # continue
-        ('SWITCH_DEFAULT', r'default'), # default
-        ('DELETE', r'delete'),          # delete
-        #('ELSE_IF', r'else if'),       # else if
-        ('COND_ELSE', r'else'),         # else
-        ('FALSE', r'false'),            # false
-        ('CATCH_FINALLY', r'finally'),  # finally
-        ('LOOP_FOR', r'for'),           # for
-        ('FUNC_FUNCTION', r'function'), # function
-        ('COND_IF', r'if'),             # if
-        ('ASSIGN_LET', r'let'),         # let
-        ('NULL', r'null'),              # null
-        ('FUNC_RETURN', r'return'),     # return
-        ('SWITCH_SWITCH', r'switch'),   # switch
-        ('CATCH_THROW', r'throw'),      # throw
-        ('CATCH_TRY', r'try'),          # try
-        ('TRUE', r'true'),              # true
-        ('ASSIGN_VAR', r'var'),         # var
-        ('LOOP_WHILE', r'while'),       # while
-        ('OPENPAR', r'\('),             # (
-        ('CLOSEPAR', r'\)'),            # )
-        ('OPENBRAC', r'\{'),            # {
-        ('CLOSEBRAC', r'\}'),           # }
-        ('COMMA', r','),                # ,
-        ('DOT', r'\.'),                 # .
-        ('SEMICOLON', r';'),            # ;
-        ('COLON', r'\:'),               # :
-        ('STRING', r'\"[^\"\n]*\"|\'[^\'\n]*\''),  # "string"
-        ('QUOTE', r'\"'),               # "
-        ('COMPARE', r'=='),             # ==
-        ('NOTCOMPARE', r'!='),          # !=
-        ('SMALLEREQUALTHAN', r'<='),    # <=
-        ('BIGGEREQUALTHAN', r'>='),     # >=
-        ('LOGICOR', r'\|\|'),           # ||
-        ('LOGICAND', r'&&'),            # &&
-        ('EQUAL', r'\='),               # =
-        ('SMALLERTHAN', r'<'),          # <
-        ('BIGGERTHAN', r'>'),           # >
-        ('PLUS', r'\+'),                # +
-        ('MINUS', r'-'),                # -
-        ('MULT', r'\*'),                # *
-        ('COMMENT', r'\/\/[^\n]*|\/\*[^\*\/]*\*\/'), # // or /* */
-        ('DIVIDE', r'\/'),              # /
-        ('TEXT', r'[a-zA-Z]\w*'),       # VARIABLE
-        #('FLOAT', r'\d(\d)*\.\d(\d)*'),# FLOAT
-        ('NUMBER', r'\d(\d)*'),         # INT
-        ('ENDLINE', r'\n'),             # NEW LINE
-        ('SKIP', r'[ \t]+'),            # SPACE and TABS
-        ('MISMATCH', r'.')              # ANOTHER CHARACTER
+        ('break', r'break'),                # break
+        ('const', r'const'),                # const
+        ('case', r'case'),                  # case
+        ('catch', r'catch'),                # catch
+        ('continue', r'continue'),          # continue
+        ('default', r'default'),            # default
+        ('delete', r'delete'),              # delete
+        ('else', r'else'),                  # else
+        ('false', r'false'),                # false
+        ('finally', r'finally'),            # finally
+        ('for', r'for'),                    # for
+        ('function', r'function'),          # function
+        ('if', r'if'),                      # if
+        ('let', r'let'),                    # let
+        ('null', r'null'),                  # null
+        ('return', r'return'),              # return
+        ('switch', r'switch'),              # switch
+        ('throw', r'throw'),                # throw
+        ('try', r'try'),                    # try
+        ('true', r'true'),                  # true
+        ('var', r'var'),                    # var
+        ('while', r'while'),                # while
+        ('undefined', r'undefined'),        # undefined
+        ('in', r'in'),                      # in
+        ('openpar', r'\('),                 # (
+        ('closepar', r'\)'),                # )
+        ('openbrac', r'\{'),                # {
+        ('closebrac', r'\}'),               # }
+        ('arrayopen', r'\['),               # [
+        ('arrayclose', r'\]'),              # ]
+        ('comma', r','),                    # ,
+        ('dot', r'\.'),                     # .
+        ('semicolon', r';'),                # ;
+        ('colon', r'\:'),                   # :
+        ('string', r'\"[^\"\n]*\"|\'[^\'\n]*\''),  # "string"
+        ('quote', r'\"'),                   # "
+        ('aposthrope', r'\''),              # '
+        ('funcline', r'\=\>'),              # =>
+        ('strictcompare', r'==='),          # ===
+        ('compare', r'=='),                 # ==
+        ('strictnotcompare', r'!=='),       # !==
+        ('notcompare', r'!='),              # !=
+        ('smallerequalthan', r'<='),        # <=
+        ('biggerequalthan', r'>='),         # >=
+        ('logicandequal', r'\&\&\='),       # &&=
+        ('logicorequal', r'\|\|\='),        # ||=
+        ('logicor', r'\|\|'),               # ||
+        ('logicand', r'&&'),                # &&
+        ('plusequal', r'\+\='),             # +=
+        ('minequal', r'\-\='),              # -=
+        ('multequal', r'\*\='),             # *=
+        ('divequal', r'\/\='),              # /=
+        ('modequal', r'\%\='),              # %=
+        ('powequal', r'\*\*\='),            # **=
+        ('shiftleftequal', r'\<\<\='),      # <<=
+        ('shiftarithrightequal', r'\>\>\='),    # >>=
+        ('shiftlogicrightequal', r'\>\>\>\='),  # >>>=
+        ('shiftleft', r'\<\<'),             # <<
+        ('shiftlogicright', r'\>\>\>'),     # >>>
+        ('shiftarithright', r'\>\>'),       # >>
+        ('andequal', r'\&\='),              # &=
+        ('xorequal', r'\^\='),              # ^=
+        ('orequal', r'\|\='),               # |=
+        ('equal', r'\='),                   # =
+        ('smallerthan', r'<'),              # <
+        ('biggerthan', r'>'),               # >
+        ('increment', r'\+\+'),             # ++    
+        ('decrement', r'\-\-'),             # --
+        ('plus', r'\+'),                    # +
+        ('minus', r'-'),                    # -
+        ('power', r'\*\*'),                 # **
+        ('mult', r'\*'),                    # *
+        ('comment', r'\/\/[^\n]*|\/\*[^\*\/]*\*\/'),  # // or /* */
+        ('divide', r'\/'),                  # /
+        ('modulo', r'\%'),                  # %
+        ('logicnot', r'\!'),                # !
+        ('and', r'\&'),                     # &
+        ('or', r'\|'),                      # |
+        ('xor', r'\^'),                     # ^
+        ('not', r'\~'),                     # ~
+        ('variable', r'[a-zA-Z]\w*'),       # variable
+        ('number', r'\d(\d)*'),             # number
+        ('endline', r'\n'),                 # new line
+        ('SKIP', r'[ \t]+'),                # space and tabs
+        ('MISMATCH', r'.')                  # unknown?!!
     ]
 
     tokensJoin = '|'.join('(?P<%s>%s)' % x for x in rules)
