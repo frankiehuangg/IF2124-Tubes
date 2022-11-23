@@ -31,7 +31,7 @@ def tokenize(code):
         ('LBRACE', r'\{'),          # {
         ('RBRACE', r'\}'),          # }
         ('COMMA', r','),            # ,
-        ('DOT', r'\.'),              # .
+        ('DOT', r'\.'),             # .
         ('SEMI_COLON', r';'),       # ;
         ('COLON', r'\:'),           # :
         ('STRING', r'\"[^\"\n]*\"|\'[^\'\n]*\''),  # "string"
@@ -48,6 +48,7 @@ def tokenize(code):
         ('PLUS', r'\+'),            # +
         ('MINUS', r'-'),            # -
         ('MULT', r'\*'),            # *
+        ('COMMENT', r'\/\/[^\n]*|\/\*[^\*\/]*\*\/'), # // or /* */
         ('DIV', r'\/'),             # /
         ('VARIABLE', r'[a-zA-Z]\w*'),     # VARIABLE
         ('FLOAT', r'\d(\d)*\.\d(\d)*'),   # FLOAT
