@@ -1,19 +1,20 @@
 productions = []
 
-def readFile(fileCFG):
-    file = open(fileCFG, 'r')
-    CFGProductions = file.readlines()
-    for i in range(len(CFGProductions)):
-        CFGProductions[i] = CFGProductions[i].replace('\n', '')
-    for i in range(len(CFGProductions)):
-        if (CFGProductions[i] == ''):
+def readFile(fileCNF):
+    file = open(fileCNF, 'r')
+    CNFProductions = file.readlines()
+    for i in range(len(CNFProductions)):
+        CNFProductions[i] = CNFProductions[i].replace('\n', '')
+    for i in range(len(CNFProductions)):
+        if (CNFProductions[i] == ''):
             continue
-        if (CFGProductions[i][0] == '#'):
+        if (CNFProductions[i][0] == '#'):
             continue
-        LHS = CFGProductions[i].split(' -> ')[0]  # non-terminal
+        LHS = CNFProductions[i].split(' -> ')[0]  # non-terminal
         # array of terminal/non-terminals
-        RHS = CFGProductions[i].split(' -> ')[1].split(' | ')
+        RHS = CNFProductions[i].split(' -> ')[1].split(' | ')
         productions.append([LHS, RHS])
+        
 readFile('grammar/CNF.txt')
 
 def parse(token):
