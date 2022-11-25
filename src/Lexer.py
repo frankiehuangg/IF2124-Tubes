@@ -1,5 +1,6 @@
 import re
-
+from src.FA import checkVarName
+from src.FA import isAllNumber
 
 def tokenize(code):
     rules = [
@@ -86,7 +87,7 @@ def tokenize(code):
         ('or', r'\|'),                      # |
         ('xor', r'\^'),                     # ^
         ('not', r'\~'),                     # ~
-        ('variable', r'[a-zA-Z]\w*'),       # variable
+        ('variable', r'[a-zA-Z0-9\_\$][a-zA-Z0-9\_\$]*'),       # variable
         ('number', r'\d(\d)*'),             # number
         ('endline', r'\n'),                 # new line
         ('SKIP', r'[ \t]+'),                # space and tabs
@@ -95,16 +96,27 @@ def tokenize(code):
 
     tokensJoin = '|'.join('(?P<%s>%s)' % x for x in rules)
     token = []
-
+    wrongVarName=False
+    theName=""
     for m in re.finditer(tokensJoin, code):
         tokenType = m.lastgroup
         tokenLexeme = m.group(tokenType)
 
         if tokenType == 'SKIP' or tokenType == 'comment' or tokenType == 'endline':
             continue
+        elif tokenType == 'variable':
+            if isAllNumber(tokenLexeme):
+                token.append('number')
+            elif(not checkVarName(tokenLexeme)):
+                wrongVarName=True
+                theName=tokenLexeme
+                break
+            else:
+                token.append(tokenType)
         elif tokenType == 'MISMATCH':
             raise RuntimeError('%r unexpected token' % (tokenLexeme))
         else:
             token.append(tokenType)
-
+    if wrongVarName:
+        return [-1,theName]
     return token

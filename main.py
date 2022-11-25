@@ -13,9 +13,11 @@ if __name__ == '__main__':
             print("\nFile tidak dapat dibuka!\n")
 
         token = tokenize(text)
-
-        print('\nTokens: ', token)
-        
-        parse(token)
+        if(token[0]==-1):
+            print("Terdapat nama variabel yang tidak tepat: ")
+            print(token[1])
+        else:
+            print('\nTokens: ', token)
+            parse(token)
     else:
         print("\nArgumen kurang dari 2!\n")
