@@ -18,3 +18,7 @@ const person = { firstName: "John", lastName: "Doe", age: 46 };
 myArray[0] = Date.now;
 myArray[1] = myFunction;
 myArray[2] = myCars;
+
+a[2][2] = [[1,2],[3,4]];
+
+a[1][1][2] = [[[2]]];
