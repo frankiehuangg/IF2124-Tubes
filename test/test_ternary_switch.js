@@ -1,10 +1,13 @@
+// true
 let bool = (3 == 5) ? 5 : 2;
 
-let tern = (a == c) ? {
-	3 + 7 :
-	9;
-}
+// false
+// let tern = (a == c) ? {
+// 	3 + 7 :
+// 	9;
+// }
 
+// true
 switch (a) {
 case 3:
 	y = 3;
@@ -18,12 +21,14 @@ default:
 	console.log("Hello");
 }
 
-switch (b) 
-{
-default:
-	let z = 0;
-}
+// false
+// switch (b) 
+// {
+// default:
+// 	let z = 0;
+// }
 
+// true
 switch (c)
 {
 case b:

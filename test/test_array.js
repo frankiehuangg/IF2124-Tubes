@@ -8,6 +8,8 @@ name[1] = "Stygwyr";
 
 const cars = ["Saab", "Volvo", "BMW"];
 
+const arr = new Array(1,2,3);
+
 const cars2 = [];
 cars2[0] = "Saab";
 cars2[1] = "Volvo";

@@ -33,6 +33,7 @@ function diff_num(a,b,c)
 		break;
 	default:
 		x = 5;
+		return x;
 	}
 }
 

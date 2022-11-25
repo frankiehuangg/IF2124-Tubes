@@ -1,12 +1,7 @@
-for (let i = 3; i < 2; i++)
-{
-	a++;
-}
+for (let i = 3; i < 2; i++) a++;
 
 for (; i < 2; i++)
-{
 	a++;
-}
 
 for (;;i++)
 {
@@ -32,6 +27,9 @@ for (; i < n; ){
 for (; ; ;){
 	a++;
 }
+
+while (i < 5)
+	i++;
 
 while (i < 3)
 {
