@@ -1,5 +1,5 @@
 // inputReject.js
-function do_something(x) {
+function something(x) {
     // This is a sample multiline comment
     if (x == 0) {
       return 0;
