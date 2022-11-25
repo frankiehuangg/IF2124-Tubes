@@ -10,6 +10,7 @@ def tokenize(code):
         ('continue', r'continue'),          # continue
         ('default', r'default'),            # default
         ('delete', r'delete'),              # delete
+        ('do', r'do'),                      # do
         ('else', r'else'),                  # else
         ('false', r'false'),                # false
         ('finally', r'finally'),            # finally
@@ -17,6 +18,7 @@ def tokenize(code):
         ('function', r'function'),          # function
         ('if', r'if'),                      # if
         ('let', r'let'),                    # let
+        ('new', r'new'),                    # new
         ('null', r'null'),                  # null
         ('return', r'return'),              # return
         ('switch', r'switch'),              # switch
@@ -33,6 +35,7 @@ def tokenize(code):
         ('closebrac', r'\}'),               # }
         ('arrayopen', r'\['),               # [
         ('arrayclose', r'\]'),              # ]
+        ('question', r'\?'),                # ?
         ('comma', r','),                    # ,
         ('dot', r'\.'),                     # .
         ('semicolon', r';'),                # ;
@@ -97,7 +100,7 @@ def tokenize(code):
         tokenType = m.lastgroup
         tokenLexeme = m.group(tokenType)
 
-        if tokenType == 'SKIP':
+        if tokenType == 'SKIP' or tokenType == 'comment' or tokenType == 'endline':
             continue
         elif tokenType == 'MISMATCH':
             raise RuntimeError('%r unexpected token' % (tokenLexeme))
