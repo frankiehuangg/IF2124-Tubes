@@ -17,7 +17,10 @@ if __name__ == '__main__':
             print("Terdapat nama variabel yang tidak tepat: ")
             print(token[1])
         else:
-            print('\nTokens: ', token)
-            parse(token)
+            if(parse(token)):
+                print('Accepted!')
+            else:
+                print('Syntax Error!!!')
+        
     else:
         print("\nArgumen kurang dari 2!\n")
