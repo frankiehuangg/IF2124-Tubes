@@ -57,5 +57,4 @@ def parse(token):
     print('here')
     '''
     # mengeluarkan true jika S berada di kotak paling atas
-    print('S' in tabel[len(token)-1][0])
     return 'S' in tabel[len(token)-1][0]
