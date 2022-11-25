@@ -202,7 +202,7 @@ PLUS -> plus
 MINUS -> minus
 MULT -> mult
 POWER -> power
-DIVIDE ->  divide
+DIVIDE -> divide
 MODULO -> modulo
 
 INCREMENT -> increment
