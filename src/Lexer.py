@@ -3,32 +3,32 @@ import re
 
 def tokenize(code):
     rules = [
-        ('break', r'break'),                # break
-        ('const', r'const'),                # const
-        ('case', r'case'),                  # case
-        ('catch', r'catch'),                # catch
-        ('continue', r'continue'),          # continue
-        ('default', r'default'),            # default
-        ('delete', r'delete'),              # delete
-        ('do', r'do'),                      # do
-        ('else', r'else'),                  # else
-        ('false', r'false'),                # false
-        ('finally', r'finally'),            # finally
-        ('for', r'for'),                    # for
-        ('function', r'function'),          # function
-        ('if', r'if'),                      # if
-        ('let', r'let'),                    # let
-        ('new', r'new'),                    # new
-        ('null', r'null'),                  # null
-        ('return', r'return'),              # return
-        ('switch', r'switch'),              # switch
-        ('throw', r'throw'),                # throw
-        ('try', r'try'),                    # try
-        ('true', r'true'),                  # true
-        ('var', r'var'),                    # var
-        ('while', r'while'),                # while
-        ('undefined', r'undefined'),        # undefined
-        ('in', r'in'),                      # in
+        ('break', r'break\b'),                # break
+        ('const', r'const\b'),                # const
+        ('case', r'case\b'),                  # case
+        ('catch', r'catch\b'),                # catch
+        ('continue', r'continue\b'),          # continue
+        ('default', r'default\b'),            # default
+        ('delete', r'delete\b'),              # delete
+        ('do', r'do\b'),                      # do
+        ('else', r'else\b'),                  # else
+        ('false', r'false\b'),                # false
+        ('finally', r'finally\b'),            # finally
+        ('for', r'for\b'),                    # for
+        ('function', r'function\b'),          # function
+        ('if', r'if\b'),                      # if
+        ('let', r'let\b'),                    # let
+        ('new', r'new\b'),                    # new
+        ('null', r'null\b'),                  # null
+        ('return', r'return\b'),              # return
+        ('switch', r'switch\b'),              # switch
+        ('throw', r'throw\b'),                # throw
+        ('try', r'try\b'),                    # try
+        ('true', r'true\b'),                  # true
+        ('var', r'var\b'),                    # var
+        ('while', r'while\b'),                # while
+        ('undefined', r'undefined\b'),        # undefined
+        ('in', r'in\b'),                      # in
         ('openpar', r'\('),                 # (
         ('closepar', r'\)'),                # )
         ('openbrac', r'\{'),                # {
